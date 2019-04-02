@@ -6,16 +6,16 @@
             <v-toolbar-title class="body-1 font-weight-light">
                Question
                <v-avatar color="accent lighten-2" class="subheading white--text" size="30"
-                  v-text="''+ step + '/' + total"></v-avatar>
+                  v-text="propProgress"></v-avatar>
             </v-toolbar-title>
             <v-toolbar-title class="body-1 font-weight-light">
                Correct
-               <v-avatar color="success lighten-1" class="subheading white--text" size="24" v-text="''+ correct">
+               <v-avatar color="success lighten-1" class="subheading white--text" size="24" v-text="propTotalCorrect">
                </v-avatar>
             </v-toolbar-title>
             <v-toolbar-title class="body-1 font-weight-light">
                Incorrect
-               <v-avatar color="error lighten-1" class="subheading white--text" size="24" v-text="''+ wrong">
+               <v-avatar color="error lighten-1" class="subheading white--text" size="24" v-text="propTotalIncorrect">
                </v-avatar>
             </v-toolbar-title>
          </v-toolbar>
@@ -25,7 +25,11 @@
 
 <script>
 export default {
-
+   props: [
+      'propProgress',
+      'propTotalCorrect',
+      'propTotalIncorrect'
+   ]
 }
 </script>
 

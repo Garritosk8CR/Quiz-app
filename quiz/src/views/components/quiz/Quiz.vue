@@ -1,6 +1,6 @@
 <template>
    <v-container text-xs-center fluid>
-      <quiz-stats />
+      <quiz-stats :propProgress="progress" :propTotalCorrect="totalCorrect" :propTotalIncorrect="totalIncorrect"/>
       <v-window v-model="step">
          <v-layout id="question" align-center justify-center fill-height row>
 
@@ -13,7 +13,8 @@
                <v-flex xs8 offset-xs2>
                   <v-container grid-list-md text-xs-center class="answers">
                      <v-layout justify-start  fill-height wrap>
-                        <v-flex md6 align-self-center v-for="(answer, index) in question.answers" :key="index">
+                        <v-flex md6 align-self-center
+                        v-for="(answer, index) in question.answers" :key="index">
                            <v-btn flat block color="primary lighten-1">{{answer}}</v-btn>
                         </v-flex>
                      </v-layout>
@@ -84,6 +85,19 @@ export default {
          }
       ]
    }),
+   computed: {
+      progress() {
+         let current = this.step + 1
+         let _progress = current + '/' + this.questions.length
+         return _progress
+      },
+      totalCorrect() {
+         return 0
+      },
+      totalIncorrect() {
+         return 0
+      }
+   },
    components: {
       QuizStats
    }
