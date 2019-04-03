@@ -4,7 +4,7 @@
 
 
 <script>
-import Quiz from './components/quiz/Quiz'
+import Quiz from './Components/quiz/Quiz'
 export default {
    data: () => ({
       total: 3,
