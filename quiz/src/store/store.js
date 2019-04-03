@@ -9,15 +9,15 @@ import * as getters from './getters'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    loading: false,
-    error: null
-  },
-  getters,
-  mutations,
-  actions,
-  modules: {
-    Auth,
-    Users
-  }
+   state: {
+      loading: false,
+      error: null
+   },
+   getters,
+   mutations,
+   actions,
+   modules: {
+      Auth,
+      Users
+   }
 })
