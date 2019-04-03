@@ -1,6 +1,6 @@
 /* eslint-disable space-before-function-paren */
 // import axios_user from '../../axios-users.js'
-import db from '@/db'
+// import db from '@/db'
 
 const state = {
    currentQuiz: null,
@@ -63,8 +63,8 @@ const getters = {
 }
 
 const mutations = {
-   storeCurrentQuiz(state, quiz) {
-      state.currentQuiz = quiz
+   setCurrentQuiz(state, quiz) {
+      state.currentQuiz = state.quizes[quiz]
    },
    storeQuizes(state, quizes) {
       state.quizes = quizes
@@ -72,23 +72,26 @@ const mutations = {
 }
 
 const actions = {
-   storeQuiz({ commit, state, rootState }, quiz) {
-      db.collection('Quizes').add(quiz)
-         .then(res => console.log(res))
-         .catch(error => console.log(error))
-   },
-   fetchQuiz({ commit, state, rootState }) {
-      var fireQuizes = []
+   // storeQuiz({ commit, state, rootState }, quiz) {
+   //    db.collection('Quizes').add(quiz)
+   //       .then(res => console.log(res))
+   //       .catch(error => console.log(error))
+   // },
+   // fetchQuiz({ commit, state, rootState }) {
+   //    var fireQuizes = []
 
-      db.collection('Quizes').get()
-         .then(querySnapshot => {
-            querySnapshot.forEach(element => {
-               fireQuizes.push(element.data())
-            })
-            commit('storeCurrentQuiz', fireQuizes.find(quiz => quiz.id === state.currentQuiz))
-            commit('storeQuizes', fireQuizes)
-         })
-         .catch(error => console.log(error))
+   //    db.collection('Quizes').get()
+   //       .then(querySnapshot => {
+   //          querySnapshot.forEach(element => {
+   //             fireQuizes.push(element.data())
+   //          })
+   //          commit('storeCurrentQuiz', fireQuizes.find(quiz => quiz.id === state.currentQuiz))
+   //          commit('storeQuizes', fireQuizes)
+   //       })
+   //       .catch(error => console.log(error))
+   // }
+   setCurrentQuiz({ commit }, index) {
+      commit('setCurrentQuiz', index)
    }
 }
 
