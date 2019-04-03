@@ -4,7 +4,7 @@
       <v-window v-model="step">
          <v-layout id="question" align-center justify-center fill-height row>
 
-            <v-window-item v-for="(question, index) in questions" :value="index" :key="index">
+            <v-window-item v-for="(question, index) in currentQuiz.questions" :value="index" :key="index">
                <v-flex xs8 offset-xs2>
                   <v-card color="grey lighten-4" class="text-center" flat>
                      <v-card-text>{{ question.text }}</v-card-text>
@@ -38,6 +38,7 @@
    </v-container>
 </template>
 <script>
+import {mapGetters, mapActions, mapMutations} from 'vuex'
 import QuizStats from './Stats'
 export default {
    data: () => ({
@@ -86,20 +87,28 @@ export default {
       ]
    }),
    computed: {
+      ...mapGetters([
+         'currentQuiz'
+      ]),
       progress() {
          let current = this.step + 1
-         let _progress = current + '/' + this.questions.length
+         let _progress = current + '/' + this.currentQuiz.questions.length
          return _progress
       },
       totalCorrect() {
-         return 0
+         return this.currentQuiz.totalCorrect
       },
       totalIncorrect() {
-         return 0
+         return this.currentQuiz.totalIncorrect
       }
    },
    components: {
       QuizStats
+   },
+   methods: {
+      ...mapActions([
+         'setCurrentQuiz'
+      ])
    }
 }
 </script>

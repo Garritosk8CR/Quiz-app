@@ -3,7 +3,53 @@
 // import db from '@/db'
 
 const state = {
-   currentQuiz: null,
+   currentQuiz: {
+      title: 'Quiz 1',
+      questions: [
+         {
+            text: 'Question 1?',
+            answers: [
+               'Answer 1',
+               'Answer 2',
+               'Answer 3',
+               'Answer 4'
+            ],
+            correctAnswer: 0
+         },
+         {
+            text: 'Question 2?',
+            answers: [
+               'Answer 1',
+               'Answer 2',
+               'Answer 3',
+               'Answer 4'
+            ],
+            correctAnswer: 1
+         },
+         {
+            text: 'Question 3?',
+            answers: [
+               'Answer 1',
+               'Answer 2',
+               'Answer 3',
+               'Answer 4'
+            ],
+            correctAnswer: 2
+         },
+         {
+            text: 'Question 4?',
+            answers: [
+               'Answer 1',
+               'Answer 2',
+               'Answer 3',
+               'Answer 4'
+            ],
+            correctAnswer: 3
+         }
+      ],
+      totalCorrect: 0,
+      totalIncorrect: 0
+   },
    quizes: [
       {
          title: '',
@@ -48,7 +94,9 @@ const state = {
                ],
                correctAnswer: 3
             }
-         ]
+         ],
+         totalCorrect: 0,
+         totalIncorrect: 0
       }
    ]
 }
