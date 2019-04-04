@@ -4,16 +4,7 @@
       <v-window v-model="step">
          <questions :propQuestions="currentQuiz.questions"/>
       </v-window>
-      <v-layout id="quizControls" align-center justify-center fill-height row>
-         <v-layout align-content-space-around justify-space-between row>
-            <v-btn :disabled="step === 0" text @click="step--">
-               Back
-            </v-btn>
-            <v-btn :disabled="step === this.questions.length - 1" color="primary" depressed @click="step++">
-               Next
-            </v-btn>
-         </v-layout>
-      </v-layout>
+
    </v-container>
 </template>
 <script>
@@ -86,13 +77,27 @@ export default {
       ])
    }
 }
+
+
 </script>
 <style scoped>
 #infoBar {
-   margin-top: 3%;
+   margin-top: 8%;
 }
 
-#quizControls {
+/* #quizControls {
    margin-top: 6%;
-}
+} */
 </style>
+
+
+<!-- <v-layout id="quizControls" align-center justify-center fill-height row>
+         <v-layout align-content-space-around justify-space-between row>
+            <v-btn :disabled="step === 0" text @click="step--">
+               Back
+            </v-btn>
+            <v-btn :disabled="step === this.questions.length - 1" color="primary" depressed @click="step++">
+               Next
+            </v-btn>
+         </v-layout>
+      </v-layout> -->

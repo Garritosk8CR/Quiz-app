@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
 .answers {
-   margin-top: 16%;
+   margin-top: 28%;
 
 }
 </style>
