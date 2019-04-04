@@ -7,6 +7,7 @@
 
    </v-container>
 </template>
+
 <script>
 import {mapGetters, mapActions, mapMutations} from 'vuex'
 import QuizStats from './Stats'
@@ -77,27 +78,10 @@ export default {
       ])
    }
 }
-
-
 </script>
+
 <style scoped>
 #infoBar {
    margin-top: 8%;
 }
-
-/* #quizControls {
-   margin-top: 6%;
-} */
 </style>
-
-
-<!-- <v-layout id="quizControls" align-center justify-center fill-height row>
-         <v-layout align-content-space-around justify-space-between row>
-            <v-btn :disabled="step === 0" text @click="step--">
-               Back
-            </v-btn>
-            <v-btn :disabled="step === this.questions.length - 1" color="primary" depressed @click="step++">
-               Next
-            </v-btn>
-         </v-layout>
-      </v-layout> -->

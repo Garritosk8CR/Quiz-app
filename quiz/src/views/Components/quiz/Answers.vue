@@ -21,7 +21,6 @@ export default {
 <style scoped>
 .answers {
    margin-top: 28%;
-
 }
 </style>
 
