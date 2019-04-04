@@ -1,30 +1,12 @@
 <template>
    <v-container text-xs-center fluid>
-      <quiz-stats :propProgress="progress" :propTotalCorrect="totalCorrect" :propTotalIncorrect="totalIncorrect"/>
+      <quiz-stats :propProgress="progress"/>
       <v-window v-model="step">
          <v-layout id="question" align-center justify-center fill-height row>
-
-            <v-window-item v-for="(question, index) in currentQuiz.questions" :value="index" :key="index">
-               <v-flex xs8 offset-xs2>
-                  <v-card color="grey lighten-4" class="text-center" flat>
-                     <v-card-text>{{ question.text }}</v-card-text>
-                  </v-card>
-               </v-flex>
-               <v-flex xs8 offset-xs2>
-                  <v-container grid-list-md text-xs-center class="answers">
-                     <v-layout justify-start  fill-height wrap>
-                        <v-flex md6 align-self-center
-                        v-for="(answer, index) in question.answers" :key="index">
-                           <v-btn flat block color="primary lighten-1">{{answer}}</v-btn>
-                        </v-flex>
-                     </v-layout>
-                  </v-container>
-               </v-flex>
-            </v-window-item>
+            <question-form v-for="(question, index) in currentQuiz.questions" :key="index" :propQuestion="question" :propWindowIndex="index"/>
          </v-layout>
       </v-window>
       <v-layout id="quizControls" align-center justify-center fill-height row>
-
          <v-layout align-content-space-around justify-space-between row>
             <v-btn :disabled="step === 0" text @click="step--">
                Back
@@ -33,13 +15,13 @@
                Next
             </v-btn>
          </v-layout>
-
       </v-layout>
    </v-container>
 </template>
 <script>
 import {mapGetters, mapActions, mapMutations} from 'vuex'
 import QuizStats from './Stats'
+import QuestionForm from './Question'
 export default {
    data: () => ({
       step: 0,
@@ -94,16 +76,11 @@ export default {
          let current = this.step + 1
          let _progress = current + '/' + this.currentQuiz.questions.length
          return _progress
-      },
-      totalCorrect() {
-         return this.currentQuiz.totalCorrect
-      },
-      totalIncorrect() {
-         return this.currentQuiz.totalIncorrect
       }
    },
    components: {
-      QuizStats
+      QuizStats,
+      QuestionForm
    },
    methods: {
       ...mapActions([
@@ -113,10 +90,6 @@ export default {
 }
 </script>
 <style scoped>
-.answers {
-   margin-top: 16%;
-
-}
 #infoBar {
    margin-top: 3%;
 }

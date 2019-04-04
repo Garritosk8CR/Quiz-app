@@ -107,6 +107,12 @@ const getters = {
    },
    quizes(state) {
       return state.quizes
+   },
+   totalCorrect(state) {
+      return state.currentQuiz.totalCorrect
+   },
+   totalIncorrect(state) {
+      return state.currentQuiz.totalIncorrect
    }
 }
 

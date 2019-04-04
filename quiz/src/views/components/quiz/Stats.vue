@@ -10,12 +10,12 @@
             </v-toolbar-title>
             <v-toolbar-title class="body-1 font-weight-light">
                Correct
-               <v-avatar color="success lighten-1" class="subheading white--text" size="24" v-text="propTotalCorrect">
+               <v-avatar color="success lighten-1" class="subheading white--text" size="24" v-text="totalCorrect">
                </v-avatar>
             </v-toolbar-title>
             <v-toolbar-title class="body-1 font-weight-light">
                Incorrect
-               <v-avatar color="error lighten-1" class="subheading white--text" size="24" v-text="propTotalIncorrect">
+               <v-avatar color="error lighten-1" class="subheading white--text" size="24" v-text="totalIncorrect">
                </v-avatar>
             </v-toolbar-title>
          </v-toolbar>
@@ -24,12 +24,17 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
    props: [
-      'propProgress',
-      'propTotalCorrect',
-      'propTotalIncorrect'
-   ]
+      'propProgress'
+   ],
+   computed: {
+      ...mapGetters([
+         'totalCorrect',
+         'totalIncorrect'
+      ]),
+   }
 }
 </script>
 
