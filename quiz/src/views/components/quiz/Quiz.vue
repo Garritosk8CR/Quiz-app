@@ -2,9 +2,7 @@
    <v-container text-xs-center fluid>
       <quiz-stats :propProgress="progress"/>
       <v-window v-model="step">
-         <v-layout id="question" align-center justify-center fill-height row>
-            <question-form v-for="(question, index) in currentQuiz.questions" :key="index" :propQuestion="question" :propWindowIndex="index"/>
-         </v-layout>
+         <questions :propQuestions="currentQuiz.questions"/>
       </v-window>
       <v-layout id="quizControls" align-center justify-center fill-height row>
          <v-layout align-content-space-around justify-space-between row>
@@ -21,7 +19,7 @@
 <script>
 import {mapGetters, mapActions, mapMutations} from 'vuex'
 import QuizStats from './Stats'
-import QuestionForm from './Question'
+import Questions from './Questions'
 export default {
    data: () => ({
       step: 0,
@@ -80,7 +78,7 @@ export default {
    },
    components: {
       QuizStats,
-      QuestionForm
+      Questions
    },
    methods: {
       ...mapActions([
@@ -93,9 +91,7 @@ export default {
 #infoBar {
    margin-top: 3%;
 }
-#question {
-   margin-top: 7%;
-}
+
 #quizControls {
    margin-top: 6%;
 }
