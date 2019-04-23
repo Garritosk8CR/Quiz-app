@@ -1,10 +1,10 @@
 <template>
    <v-container text-xs-center fluid>
-      <quiz-stats :propProgress="progress"/>
-      <v-window v-model="step">
+      <quiz-stats />
+      <v-window :value="step">
          <questions :propQuestions="currentQuiz.questions"/>
       </v-window>
-
+      <quiz-controls />
    </v-container>
 </template>
 
@@ -12,65 +12,21 @@
 import {mapGetters, mapActions, mapMutations} from 'vuex'
 import QuizStats from './Stats'
 import Questions from './Questions'
+import QuizControls from './QuizControls'
 export default {
    data: () => ({
-      step: 0,
-      questions: [
-         {
-            text: 'Question 1?',
-            answers: [
-               'Answer 1',
-               'Answer 2',
-               'Answer 3',
-               'Answer 4'
-            ],
-            correctAnswer: 0
-         },
-         {
-            text: 'Question 2?',
-            answers: [
-               'Answer 1',
-               'Answer 2',
-               'Answer 3',
-               'Answer 4'
-            ],
-            correctAnswer: 1
-         },
-         {
-            text: 'Question 3?',
-            answers: [
-               'Answer 1',
-               'Answer 2',
-               'Answer 3',
-               'Answer 4'
-            ],
-            correctAnswer: 2
-         },
-         {
-            text: 'Question 4?',
-            answers: [
-               'Answer 1',
-               'Answer 2',
-               'Answer 3',
-               'Answer 4'
-            ],
-            correctAnswer: 3
-         }
-      ]
+
    }),
    computed: {
       ...mapGetters([
-         'currentQuiz'
-      ]),
-      progress() {
-         let current = this.step + 1
-         let _progress = current + '/' + this.currentQuiz.questions.length
-         return _progress
-      }
+         'currentQuiz',
+         'step'
+      ])
    },
    components: {
       QuizStats,
-      Questions
+      Questions,
+      QuizControls
    },
    methods: {
       ...mapActions([

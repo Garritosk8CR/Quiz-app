@@ -1,6 +1,11 @@
 <template>
    <v-layout id="question" align-center justify-center fill-height row>
-      <question-form v-for="(question, index) in propQuestions" :key="index" :propQuestion="question" :propWindowIndex="index"/>
+      <question-form
+         v-for="(question, index) in propQuestions"
+         :key="index"
+         :propQuestion="question"
+         :propWindowIndex="index"
+      />
    </v-layout>
 </template>
 
