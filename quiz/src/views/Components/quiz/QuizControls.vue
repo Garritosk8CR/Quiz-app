@@ -50,15 +50,17 @@ export default {
       ]),
       ...mapActions([
          'setIsAnswerSelected',
-         'setDefinitiveAnswer'
+         'setDefinitiveAnswer',
+         'calculateResult'
       ]),
       clickNext() {
+         this.setDefinitiveAnswer()
          if(!this.isLastQuestion) {
             this.setStep(this.step + 1)
             this.setIsAnswerSelected(false)
          } else {
-            this.setDefinitiveAnswer()
             this.setIsQuizOver(true)
+            this.calculateResult()
          }
       }
    },

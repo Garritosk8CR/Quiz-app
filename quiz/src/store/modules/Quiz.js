@@ -61,51 +61,60 @@ const state = {
    },
    quizes: [
       {
-         title: '',
+         title: 'Quiz 1',
          questions: [
             {
                text: 'Question 1?',
                answers: [
-                  'Answer 1',
-                  'Answer 2',
-                  'Answer 3',
-                  'Answer 4'
+                  { text: 'Answer 1', isCorrect: true },
+                  { text: 'Answer 2', isCorrect: false },
+                  { text: 'Answer 3', isCorrect: false },
+                  { text: 'Answer 4', isCorrect: false}
                ],
-               correctAnswer: 0
+               correctAnswer: 0,
+               isAnswerSelected: false
             },
             {
                text: 'Question 2?',
                answers: [
-                  'Answer 1',
-                  'Answer 2',
-                  'Answer 3',
-                  'Answer 4'
+                  { text: 'Answer 1', isCorrect: false },
+                  { text: 'Answer 2', isCorrect: true },
+                  { text: 'Answer 3', isCorrect: false },
+                  { text: 'Answer 4', isCorrect: false}
                ],
-               correctAnswer: 1
+               correctAnswer: 1,
+               isAnswerSelected: false
             },
             {
                text: 'Question 3?',
                answers: [
-                  'Answer 1',
-                  'Answer 2',
-                  'Answer 3',
-                  'Answer 4'
+                  { text: 'Answer 1', isCorrect: false },
+                  { text: 'Answer 2', isCorrect: false },
+                  { text: 'Answer 3', isCorrect: true },
+                  { text: 'Answer 4', isCorrect: false}
                ],
-               correctAnswer: 2
+               correctAnswer: 2,
+               isAnswerSelected: false
             },
             {
                text: 'Question 4?',
                answers: [
-                  'Answer 1',
-                  'Answer 2',
-                  'Answer 3',
-                  'Answer 4'
+                  { text: 'Answer 1', isCorrect: false },
+                  { text: 'Answer 2', isCorrect: false },
+                  { text: 'Answer 3', isCorrect: false },
+                  { text: 'Answer 4', isCorrect: true}
                ],
-               correctAnswer: 3
+               correctAnswer: 3,
+               isAnswerSelected: false
             }
          ],
          totalCorrect: 0,
-         totalIncorrect: 0
+         totalIncorrect: 0,
+         currentQuestion: 0,
+         step:0,
+         selectedAnswers: [],
+         currentAnswerSelected: null,
+         isQuizOver: false
       }
    ]
 }
@@ -155,6 +164,9 @@ const getters = {
    },
    isQuizOver(state) {
       return state.currentQuiz.isQuizOver
+   },
+   selectedAnswers(state) {
+      return state.currentQuiz.selectedAnswers
    }
 }
 
@@ -179,12 +191,30 @@ const mutations = {
       state.currentQuiz.currentAnswerSelected = answerSelected
    },
    setSelectedAnswer(state, definitiveAnswer) {
-      state.currentQuiz.selectedAnswers.push(definitiveAnswer)
+      state.currentQuiz.selectedAnswers.push({...definitiveAnswer})
    },
    setIsQuizOver(state, isQuizOver) {
       let currentQuiz = state.currentQuiz
       let updatedCurrentQuiz = {...currentQuiz}
       updatedCurrentQuiz.isQuizOver = isQuizOver
+      state.currentQuiz = updatedCurrentQuiz
+   },
+   setSelectedAnswers(state, selectedAnswers) {
+      let currentQuiz = state.currentQuiz
+      let updatedCurrentQuiz = {...currentQuiz}
+      updatedCurrentQuiz.selectedAnswers = selectedAnswers
+      state.currentQuiz = updatedCurrentQuiz
+   },
+   setCorrectAnswers(state, numCorrectAnswers) {
+      let currentQuiz = state.currentQuiz
+      let updatedCurrentQuiz = {...currentQuiz}
+      updatedCurrentQuiz.totalCorrect = numCorrectAnswers
+      state.currentQuiz = updatedCurrentQuiz
+   },
+   setIncorrectAnswers(state, numIncorrectAnswers) {
+      let currentQuiz = state.currentQuiz
+      let updatedCurrentQuiz = {...currentQuiz}
+      updatedCurrentQuiz.totalIncorrect = numIncorrectAnswers
       state.currentQuiz = updatedCurrentQuiz
    }
 }
@@ -208,6 +238,7 @@ const actions = {
       commit('updateCurrentQuestionSelectedAnswer', currentQuestion)
    },
    updateCurrentAnswerSelected({commit}, answerSelected) {
+
       commit('setCurrentAnswerSelected', answerSelected)
    },
    removeCurrentAnswerSelected({commit}) {
@@ -215,6 +246,19 @@ const actions = {
    },
    setDefinitiveAnswer({commit, getters}) {
       commit('setSelectedAnswer', getters.currentAnswerSelected)
+   },
+   restart({commit}) {
+      let quizArrayIndex = 0
+      commit('setCurrentQuiz', quizArrayIndex)
+   },
+   calculateResult({commit, getters}) {
+      getters.selectedAnswers.forEach(answer => {
+         if(answer.isCorrect) {
+            commit('setCorrectAnswers', getters.totalCorrect + 1)
+         } else {
+            commit('setIncorrectAnswers', getters.totalIncorrect + 1)
+         }
+      })
    }
 }
 
