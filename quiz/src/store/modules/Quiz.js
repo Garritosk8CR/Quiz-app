@@ -167,6 +167,9 @@ const getters = {
    },
    selectedAnswers(state) {
       return state.currentQuiz.selectedAnswers
+   },
+   totalQuestions(state) {
+      return state.currentQuiz.questions.length
    }
 }
 

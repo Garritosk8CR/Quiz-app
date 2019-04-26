@@ -1,11 +1,14 @@
 <template>
    <v-container fluid fill-height>
       <v-layout align-center justify-center row fill-height>
-         <v-card  max-width="344" class="mx-auto">
+         <v-card elevation="8" max-width="344" class="mx-auto">
             <v-card-title primary-title>
                   <p class="display-1 mb-0">Quiz results</p>
             </v-card-title>
             <v-card-text>
+               <div>
+                  <p class="subheading font-weight-light">Total questions: {{ totalQuestions }}</p>
+               </div>
                <v-divider></v-divider>
                <div>
                   <p class="title font-weight-light">Correct Answers: {{ totalCorrect }}</p>
@@ -31,7 +34,8 @@ export default {
    computed: {
       ...mapGetters([
          'totalCorrect',
-         'totalIncorrect'
+         'totalIncorrect',
+         'totalQuestions'
       ])
    },
    methods: {
