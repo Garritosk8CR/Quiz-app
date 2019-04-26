@@ -19,16 +19,6 @@ export default {
             title: 'Question',
             value: 'progress',
             color: 'accent lighten-2'
-         },
-         {
-            title: 'Correct',
-            value: 'totalCorrect',
-            color: 'success lighten-2'
-         },
-         {
-            title: 'Incorrect',
-            value: 'totalIncorrect',
-            color: 'error lighten-2'
          }
       ]
    }),

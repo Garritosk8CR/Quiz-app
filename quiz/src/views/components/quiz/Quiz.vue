@@ -38,6 +38,6 @@ export default {
 
 <style scoped>
 #infoBar {
-   margin-top: 8%;
+   margin-top: 3%;
 }
 </style>
