@@ -1,13 +1,12 @@
 <template>
-   <div>
-      <div v-if="isQuizOver == false">
+   <v-container fill-height>
+      <template v-if="isQuizOver == false" >
          <quiz />
-      </div>
-      <div v-else>
+      </template>
+      <template v-else>
          <result />
-      </div>
-   </div>
-
+      </template>
+   </v-container>
 </template>
 
 <script>
