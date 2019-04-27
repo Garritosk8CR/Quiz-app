@@ -175,7 +175,7 @@ const getters = {
 
 const mutations = {
    setCurrentQuiz(state, quiz) {
-      state.currentQuiz = state.quizes[quiz]
+      state.currentQuiz = JSON.parse(JSON.stringify(state.quizes[quiz]))
    },
    storeQuizes(state, quizes) {
       state.quizes = quizes
